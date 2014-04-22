@@ -30,7 +30,22 @@ players.red = {
 
   move: function(callback) {
     var bestMove = 3;
-    return callback(bestMove);
+    var array = [];
+    for(var i = 0;  i < 7; i++){
+      array.push(evaluateBoard(makeMove(1, i), 1));
+    }
+    var temp = Math.max.apply(null, array);
+
+     var startTime = Date.now();
+    var tempTime =  Date.now() - startTime;
+
+    if (tempTime < 2000){
+    bestMove = array.indexOf(temp);
+     return callback(bestMove);
+    } else 
+    {
+      return callback(bestMove);
+    }
   }
 
 };
